@@ -18,7 +18,7 @@
   </div>
   <div class="description">{{ node.Size | bytes }} - {{ ago(node.Modified) }}</div>
   <div class="preview" ng-if="showPreview">
-    <audio ng-if="audioPreview" controls>
+    <audio ng-if="true" controls>
       <source ng-src="{{ showPreview ? ('download/'+node.$path) : '' }}">
     </audio>
     <img ng-if="imagePreview" ng-src="{{ showPreview ? ('download/'+node.$path) : '' }}">
