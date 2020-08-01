@@ -109,4 +109,7 @@ app.controller("NodeController", function($scope, $rootScope, $http, $timeout) {
   $scope.togglePreview = function() {
     $scope.showPreview = !$scope.showPreview;
   };
+  $scope.tomp4 = function() {
+    $http.get("api/tomp4?input=" + n.$path+"&output="+n.$path);
+  };
 });

@@ -70,7 +70,8 @@ type Server struct {
 
 	//torrent engine
 	engine *engine.Engine
-	state  struct {
+
+	state struct {
 		velox.State
 		sync.Mutex
 		Config          engine.Config

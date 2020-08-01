@@ -2,7 +2,11 @@ package engine
 
 import (
 	"bufio"
+	"cloud-torrent/engine/ffmpeg"
 	"fmt"
+	eglog "github.com/anacrolix/log"
+	"github.com/anacrolix/torrent"
+	"github.com/anacrolix/torrent/metainfo"
 	"io"
 	"log"
 	"net/http"
@@ -13,10 +17,6 @@ import (
 	"strings"
 	"sync"
 	"time"
-
-	eglog "github.com/anacrolix/log"
-	"github.com/anacrolix/torrent"
-	"github.com/anacrolix/torrent/metainfo"
 )
 
 const (
@@ -36,6 +36,7 @@ type Engine struct {
 	client        *torrent.Client
 	closeSync     chan struct{}
 	config        Config
+	ff            ffmpeg.Ff
 	ts            map[string]*Torrent
 	bttracker     []string
 	doneThreshold time.Duration
@@ -275,6 +276,13 @@ func genEnv(dir, path, hash, ttype, api string, size int64, ts int64) []string {
 		fmt.Sprintf("CLD_STARTTS=%d", ts),
 	)
 	return env
+}
+
+func (e *Engine) Tomp4(input, output string) error {
+	e.RLock()
+	ffmpeg.Tomp4(input, output)
+	e.RLock()
+	return nil
 }
 
 func (e *Engine) upsertTorrent(tt *torrent.Torrent) *Torrent {
