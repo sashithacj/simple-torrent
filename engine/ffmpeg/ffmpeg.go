@@ -1,9 +1,9 @@
 package ffmpeg
 
 import (
-	_ "errors"
 	"fmt"
 	"log"
+	"sync"
 
 	"github.com/xfrr/goffmpeg/transcoder"
 )
@@ -30,16 +30,17 @@ func Tomp4(inputPath, outputPath string) {
 	// Handle error...
 
 	// Start transcoder process without checking progress
-	done := trans.Run(true)
-	fmt.Print(done)
-	// This channel is used to wait for the process to end
-	progress := trans.Output()
-
-	// Example of printing transcoding progress
-	for msg := range progress {
-		fmt.Println(msg)
-	}
-
-	err = <-done
+	var mutex sync.RWMutex
+	// Start transcoder process without checking progress
+	go func() {
+		mutex.RLock()
+		done := trans.Run(true)
+		fmt.Print(done)
+		progress := trans.Output()
+		for msg := range progress {
+			fmt.Println(msg)
+		}
+		mutex.RUnlock()
+	}()
 
 }
