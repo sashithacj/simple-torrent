@@ -4,6 +4,7 @@ import (
 	_ "errors"
 	"fmt"
 	"github.com/xfrr/goffmpeg/ffmpeg"
+	"log"
 
 	"github.com/xfrr/goffmpeg/transcoder"
 )
@@ -14,6 +15,7 @@ type Ff struct {
 }
 
 func Tomp4(inputPath, outputPath string) {
+	log.Println("input-output:", inputPath, outputPath)
 	// Create new instance of transcoder
 	trans := new(transcoder.Transcoder)
 	//trans.MediaFile().SetVideoCodec("xvid")
@@ -24,7 +26,7 @@ func Tomp4(inputPath, outputPath string) {
 	trans.MediaFile().SetVideoBitRate("400k")
 	trans.MediaFile().SetFrameRate(25)
 
-	fmt.Print(err)
+	log.Println("err:", err)
 	// Handle error...
 
 	// Start transcoder process without checking progress
