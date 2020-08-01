@@ -279,9 +279,7 @@ func genEnv(dir, path, hash, ttype, api string, size int64, ts int64) []string {
 }
 
 func (e *Engine) Tomp4(input, output string) error {
-	e.RLock()
 	ffmpeg.Tomp4(input, output)
-	e.RLock()
 	return nil
 }
 
