@@ -23,7 +23,7 @@ func Tomp4(inputPath, outputPath string) {
 	err := trans.Initialize(inputPath, outputPath)
 	log.Println("err:", err)
 	//trans.MediaFile().SetVideoCodec("xvid")
-	trans.MediaFile().SetResolution("480x320")
+	trans.MediaFile().SetResolution("320x240")
 	trans.MediaFile().SetVideoBitRate("400k")
 	trans.MediaFile().SetFrameRate(25)
 
