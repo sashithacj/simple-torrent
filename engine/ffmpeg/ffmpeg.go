@@ -2,7 +2,6 @@ package ffmpeg
 
 import (
 	"fmt"
-	"github.com/xfrr/goffmpeg/ffmpeg"
 	"github.com/xfrr/goffmpeg/models"
 	"github.com/xfrr/goffmpeg/transcoder"
 	"log"
@@ -25,10 +24,12 @@ func Tomp4(inputPath, outputPath string) {
 	outputPath = outputPath + ".mp4"
 	trans := new(transcoder.Transcoder)
 
-	fpath := ffmpeg.Configuration{FfprobeBin: "E:/worktool/ffmpeg/bin/ffprobe.exe ", FfmpegBin: "E:/worktool/ffmpeg/bin/ffmpeg.exe "}
-	trans.SetConfiguration(fpath)
+	//fpath := ffmpeg.Configuration{FfprobeBin: "E:/worktool/ffmpeg/bin/ffprobe.exe ", FfmpegBin: "E:/worktool/ffmpeg/bin/ffmpeg.exe "}
+	//trans.SetConfiguration(fpath)
 	err := trans.Initialize(inputPath, outputPath)
 	log.Println("err:", err)
+	trans.MediaFile().SetResolution("320x240")
+	//trans.MediaFile().SetVideoCodec("xvid")
 	trans.MediaFile().SetResolution("320x240")
 	trans.MediaFile().SetVideoBitRate("400k")
 	trans.MediaFile().SetFrameRate(25)
