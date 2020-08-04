@@ -74,6 +74,7 @@ type Server struct {
 	state struct {
 		velox.State
 		sync.Mutex
+		ffm             []*ffm
 		Config          engine.Config
 		SearchProviders scraper.Config
 		Downloads       *fsNode

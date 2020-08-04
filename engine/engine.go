@@ -36,7 +36,6 @@ type Engine struct {
 	client        *torrent.Client
 	closeSync     chan struct{}
 	config        Config
-	ff            ffmpeg.Ff
 	ts            map[string]*Torrent
 	bttracker     []string
 	doneThreshold time.Duration
