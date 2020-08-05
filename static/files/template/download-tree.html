@@ -9,12 +9,12 @@
   <div class="header">
     <a ng-if="!isdownloading()" ng-href="download/{{ node.$path }}">{{ node.Name }}</a>
     <span ng-if="isfile() && isdownloading()">{{ node.Name }}</span>
-    <span >
-      <i ng-show="!confirm" ng-click="preremove()" class="red trash icon"></i>
-      <i ng-show="!deleting && confirm" ng-click="deleting = true; remove();" class="red check icon"></i>
-      <i ng-show="deleting" class="grey notched circle loading icon"></i>
-      <i ng-click="togglePreview()" class="blue {{ showPreview ? 'circle outline' : 'video play outline' }} icon"></i>
-      <i ng-click="tomp4()" class="blue film icon"></i>{{ node.Process }}
+    <span  >
+        <i ng-show="!confirm" ng-click="preremove()" class="red trash icon"></i>
+        <i ng-show="!deleting && confirm" ng-click="deleting = true; remove();" class="red check icon"></i>
+        <i ng-show="deleting" class="grey notched circle loading icon"></i>
+        <i ng-show="imagePreview || videoPreview || audioPreview" ng-click="togglePreview()" class="blue {{ showPreview ? 'circle outline' : 'video play outline' }} icon"></i>
+        <i ng-show="videoPreview" ng-click="tomp4()" class="blue film icon"></i>{{ node.Process }}
     </span>
   </div>
   <div class="description">{{ node.Size | bytes }} - {{ ago(node.Modified) }}</div>

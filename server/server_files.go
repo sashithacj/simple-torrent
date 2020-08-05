@@ -91,14 +91,10 @@ func list(path string, info os.FileInfo, node *fsNode, n *int) error {
 	if (*n) > fileNumberLimit {
 		return errors.New("Over file limit") //limit number of files walked
 	}
-	m := ffmpeg.ListProgress()
-	p := m[info.Name()]
+	m := ffmpeg.ListProgress(info.Name())
+	node.Process = m
 	node.Name = info.Name()
 	node.Size = info.Size()
-	if p != 0.00 {
-		fmt.Println(p)
-		node.Process = p
-	}
 	node.Modified = info.ModTime()
 	if !info.IsDir() {
 		return nil

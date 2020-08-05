@@ -36,7 +36,7 @@ app.controller("NodeController", function($scope, $rootScope, $http, $timeout) {
   n.$closed = $scope.agoHrs(n.Modified) > 24;
   $scope.audioPreview = /\.(mp3|m4a)$/.test(path);
   $scope.imagePreview = /\.(jpe?g|png|gif)$/.test(path);
-  $scope.videoPreview = /\.(mp4|mkv|mov)$/.test(path);
+  $scope.videoPreview = /\.(avi|wmv|mpeg|mp4|m4v|mov|asf|flv|f4v|rmvb|rm|3gp|vob)$/.test(path);
 
   //search for this file
   var torrents = $rootScope.state.Torrents;
