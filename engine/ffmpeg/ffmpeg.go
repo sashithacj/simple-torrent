@@ -43,7 +43,6 @@ func Tomp4(inputPath, outputPath string) {
 		for msg := range progress {
 			mm[key] = msg.Progress
 			fmt.Println(msg)
-			time.Sleep(time.Second * 5)
 		}
 		delete(mm, key)
 	}()
