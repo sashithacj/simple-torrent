@@ -6,7 +6,6 @@ import (
 	"log"
 	"path"
 	"sync"
-	"time"
 )
 
 var mm = make(map[string]float64)
