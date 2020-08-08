@@ -14,6 +14,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"sync"
 	"time"
@@ -332,7 +333,11 @@ func (e *Engine) StartTorrent(infohash string) error {
 	if t.t.Info() != nil {
 		// start file by setting the priority
 		for _, f := range t.t.Files() {
-			f.SetPriority(torrent.PiecePriorityNormal)
+			if regexp.MustCompile(e.config.FileSuffix).MatchString(f.Path()) {
+				f.SetPriority(torrent.PiecePriorityNormal)
+			} else {
+				f.SetPriority(torrent.PiecePriorityNone)
+			}
 		}
 
 		// call to DownloadAll cause StartFile/StopFile not working
