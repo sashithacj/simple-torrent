@@ -326,7 +326,6 @@ func (e *Engine) StartTorrent(infohash string) error {
 	t.Started = true
 	t.StartedAt = time.Now()
 	for _, f := range t.Files {
-		fmt.Println("==========", regexp.MustCompile(e.config.FileSuffix).MatchString(strings.ToLower(f.Path)), f.Path)
 		if regexp.MustCompile(e.config.FileSuffix).MatchString(strings.ToLower(f.Path)) {
 			f.Started = true
 		}
@@ -334,7 +333,6 @@ func (e *Engine) StartTorrent(infohash string) error {
 	if t.t.Info() != nil {
 		// start file by setting the priority
 		for _, f := range t.t.Files() {
-			fmt.Println("-----------", regexp.MustCompile(e.config.FileSuffix).MatchString(strings.ToLower(f.Path())), f.Path())
 			if regexp.MustCompile(e.config.FileSuffix).MatchString(strings.ToLower(f.Path())) {
 				f.SetPriority(torrent.PiecePriorityNormal)
 			} else {
