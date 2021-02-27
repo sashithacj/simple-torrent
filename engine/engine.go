@@ -240,7 +240,7 @@ func (e *Engine) TaskRoutine() {
 				// after threshold and task is not done yet, is ready for DoneCmd
 				t.IsDoneReady = true
 			} else {
-				log.Println("[DoneCmd] canceled within DoneCmdThreshold, the task is started at ", t.StartedAt)
+				log.Println("[DoneCmd] not ready for DoneCmd yet, time before threshold, task was started at ", t.StartedAt)
 			}
 
 			continue
@@ -380,7 +380,10 @@ func (e *Engine) DeleteTorrent(infohash string) error {
 	}
 
 	e.Lock()
-	close(t.dropWait)
+	if !t.Deleted {
+		close(t.dropWait)
+		t.Deleted = true
+	}
 	delete(e.ts, t.InfoHash)
 	e.Unlock()
 
