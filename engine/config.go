@@ -41,7 +41,6 @@ type Config struct {
 	EnableSeeding        bool
 	IncomingPort         int
 	DoneCmd              string
-	DoneCmdThreshold     string
 	SeedRatio            float32
 	UploadRate           string
 	DownloadRate         string
@@ -66,7 +65,6 @@ func InitConf(specPath string) (*Config, error) {
 	viper.SetDefault("EnableUpload", true)
 	viper.SetDefault("AutoStart", true)
 	viper.SetDefault("DoneCmd", "")
-	viper.SetDefault("DoneCmdThreshold", "3s")
 	viper.SetDefault("SeedRatio", 0)
 	viper.SetDefault("ObfsPreferred", true)
 	viper.SetDefault("ObfsRequirePreferred", false)
