@@ -5,7 +5,7 @@ FROM golang:alpine AS builder
 RUN apk update && apk add --no-cache git
 WORKDIR /root/cloud-torrent
 ENV PATH=$HOME/go/bin:$PATH 
-RUN git clone https://github.com/boypt/cloud-torrent.git . && \
+RUN git clone https://github.com/sashithacj/simple-torrent.git . && \
     go get -v -u github.com/shuLhan/go-bindata/... && \
     go get -v -t -d ./... && \
     cd static && \
