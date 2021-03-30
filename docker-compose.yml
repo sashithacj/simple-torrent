@@ -2,12 +2,17 @@ version: '3.3'
 services:
     cloud-torrent:
 #        network_mode: host
+        container_name: "cloud-torrent"
+        build:
+            context: "."
         ports:
-            - '3000:3000'
+            - 80:80
+#        ports:
+#            - '3000:3000'
 #            - '50007:50007'
         volumes:
             - '/path/to/my/downloads:/downloads'
             - '/path/to/my/torrents:/torrents'
             - '/path/to/my/config:/etc/cloud-torrent'
-        image: boypt/cloud-torrent
-        command: --auth username:password
+#        image: boypt/cloud-torrent
+#        command: --auth username:password
